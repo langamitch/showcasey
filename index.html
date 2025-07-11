@@ -17,18 +17,22 @@
             background-color: #ffffff; /* Very light grey background */
             color: #333; /* Dark grey text for readability */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            font-weight:500;
+            font-size: 16px;
+            padding: 15px;
             margin: 0;
             
         }
 
         /* --- Form Container --- */
         .form-container {
-            background-color: #ffffff; /* White form background */
-            padding: 40px;
-            border-radius: 8px;
+            background-color:#fdfdfd; /* White form background */
+            padding: 30px;
+            border-radius: 40px;
             max-width: 600px;
             width: 100%;
             border: 1px solid #e0e0e0; /* Subtle light grey border */
@@ -39,7 +43,7 @@
             color: #000000; /* Pure black for the main title */
             margin: 0 0 10px 0;
             font-size: 28px;
-            text-align: center;
+            text-align: left;
         }
 
         .form-header p {
@@ -69,17 +73,19 @@
             padding: 12px;
             border: 1px solid #ffffff; /* Standard grey border */
             border-bottom: 2px solid #cccccc; /* Standard grey border */
-            border-radius: 4px;
             background-color: #fdfdfd;
             box-sizing: border-box; /* Important for padding and width calculation */
             transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Inter', sans-serif;
         }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
         select:focus,
         textarea:focus {
+            border: none;
             outline: none;
+            font-family: 'Inter', sans-serif;
             border-color: #000000; /* Black border on focus for high contrast */
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
@@ -163,14 +169,23 @@
         .status-error {
             color: #dc3545;
         }
+        .logo{
+            font-size:16px;
+            text-align: left;
+            background-color: black;
+            padding:10px;
+            color: White;
+            width: 100%;
+
+        }
 
     </style>
 </head>
 <body>
-
+<h1 class="logo">Showcasy</h1>
     <div class="form-container">
         <div class="form-header">
-            <h1>Showcasy</h1>
+            
             <p>Have an app idea? We'd love to hear it. Share your suggestion below.</p>
         </div>
 
