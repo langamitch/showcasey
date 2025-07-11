@@ -6,18 +6,22 @@
     <title>Showcasy - App Idea Submission</title>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
     <style>
         /* --- General Body & Font Styles --- */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            background-color: #f4f4f4; /* Very light grey background */
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* Very light grey background */
             color: #333; /* Dark grey text for readability */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            
         }
 
         /* --- Form Container --- */
@@ -25,7 +29,6 @@
             background-color: #ffffff; /* White form background */
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             width: 100%;
             border: 1px solid #e0e0e0; /* Subtle light grey border */
@@ -64,7 +67,8 @@
         textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #cccccc; /* Standard grey border */
+            border: 1px solid #ffffff; /* Standard grey border */
+            border-bottom: 2px solid #cccccc; /* Standard grey border */
             border-radius: 4px;
             background-color: #fdfdfd;
             box-sizing: border-box; /* Important for padding and width calculation */
@@ -131,9 +135,9 @@
             background-color: #000000; /* Black background */
             color: #ffffff; /* White text */
             border: none;
-            border-radius: 4px;
+            border-radius: 20px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 500;
             cursor: pointer;
             transition: background-color 0.3s;
         }
