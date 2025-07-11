@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcasy - App Idea Submission</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <style>
+        /* --- General Body & Font Styles --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f4f4f4; /* Very light grey background */
+            color: #333; /* Dark grey text for readability */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* --- Form Container --- */
+        .form-container {
+            background-color: #ffffff; /* White form background */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid #e0e0e0; /* Subtle light grey border */
+        }
+
+        /* --- Headers & Titles --- */
+        .form-header h1 {
+            color: #000000; /* Pure black for the main title */
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .form-header p {
+            color: #555555; /* Medium-dark grey for the subtitle */
+            margin-bottom: 30px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        /* --- Form Elements Styling --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc; /* Standard grey border */
+            border-radius: 4px;
+            background-color: #fdfdfd;
+            box-sizing: border-box; /* Important for padding and width calculation */
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #000000; /* Black border on focus for high contrast */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Radio Button Group ("What's in your mind?") --- */
+        fieldset {
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 0;
+        }
+
+        legend {
+            font-weight: 600;
+            padding: 0 10px;
+            color: #333333;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .radio-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .radio-option label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        #other-input-container {
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+        }
+        
+        /* --- Text Area --- */
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* --- Submit Button --- */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text */
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #333333; /* Dark grey on hover */
+        }
+        
+        .submit-btn:disabled {
+            background-color: #888888;
+            cursor: not-allowed;
+        }
+
+        /* --- Status Message --- */
+        #form-status {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .status-success {
+            color: #28a745;
+        }
+        .status-error {
+            color: #dc3545;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Showcasy</h1>
+            <p>Have an app idea? We'd love to hear it. Share your suggestion below.</p>
+        </div>
+
+        <form id="suggestion-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="company">Company Name (If available)</label>
+                <input type="text" id="company" name="company">
+            </div>
+
+            <div class="form-group">
+                <fieldset>
+                    <legend>What's in your mind?</legend>
+                    <div class="radio-option">
+                        <input type="radio" id="social" name="idea_type" value="Social Networking" onclick="toggleOtherInput(false)" required>
+                        <label for="social">Social Networking App</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="productivity" name="idea_type" value="Productivity Tool" onclick="toggleOtherInput(false)">
+                        <label for="productivity">Productivity Tool</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="ecommerce" name="idea_type" value="E-commerce Platform" onclick="toggleOtherInput(false)">
+                        <label for="ecommerce">E-commerce Platform</label>
+                    </div>
+                     <div class="radio-option">
+                        <input type="radio" id="education" name="idea_type" value="Education App" onclick="toggleOtherInput(false)">
+                        <label for="education">Education / Learning App</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="other" name="idea_type" value="Other" onclick="toggleOtherInput(true)">
+                        <label for="other">Other (Please specify)</label>
+                    </div>
+                    <div id="other-input-container">
+                        <input type="text" id="other_text" name="other_text" placeholder="Your unique idea...">
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group">
+                <label for="budget">Budget Range</label>
+                <select id="budget" name="budget" required>
+                    <option value="" disabled selected>Select a range</option>
+                    <option value="<5k">&lt; $5,000</option>
+                    <option value="5k-15k">$5,000 - $15,000</option>
+                    <option value="15k-30k">$15,000 - $30,000</option>
+                    <option value="30k-50k">$30,000 - $50,000</option>
+                    <option value=">50k">&gt; $50,000</option>
+                    <option value="unsure">I'm not sure</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Short Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="Briefly describe your idea or what problem it solves..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-btn">Submit Suggestion</button>
+
+            <div id="form-status"></div>
+        </form>
+    </div>
+
+    <script>
+        // --- START OF FIREBASE SCRIPT ---
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDwmgfTLpAZ9gTf9TqtkiGatEpW3-GhNMc",
+    authDomain: "showcasy.firebaseapp.com",
+    projectId: "showcasy",
+    storageBucket: "showcasy.firebasestorage.app",
+    messagingSenderId: "556600886662",
+    appId: "1:556600886662:web:6c07d61cebe4e14458d807",
+    measurementId: "G-MCL82TLBCP"
+  };
+
+        // 2. INITIALIZE FIREBASE AND FIRESTORE
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 3. GET FORM ELEMENTS
+        const suggestionForm = document.getElementById('suggestion-form');
+        const submitButton = document.getElementById('submit-btn');
+        const formStatus = document.getElementById('form-status');
+
+        // 4. ADD EVENT LISTENER TO THE FORM
+        suggestionForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission (page reload)
+
+            // Disable button to prevent multiple submissions
+            submitButton.disabled = true;
+            submitButton.innerText = 'Submitting...';
+            formStatus.innerText = '';
+
+            // Get the selected radio button's value
+            let ideaType = document.querySelector('input[name="idea_type"]:checked').value;
+            let ideaDescription = ideaType;
+
+            // If "Other" is selected, use the text from the input field
+            if (ideaType === 'Other') {
+                ideaDescription = document.getElementById('other_text').value;
+            }
+
+            // Create a data object to send to Firestore
+            const suggestionData = {
+                name: suggestionForm.name.value,
+                email: suggestionForm.email.value,
+                company: suggestionForm.company.value,
+                ideaType: ideaType,
+                ideaDescription: ideaDescription, // This holds the "Other" text if applicable
+                budget: suggestionForm.budget.value,
+                message: suggestionForm.message.value,
+                submittedAt: new Date() // Add a timestamp
+            };
+            
+            try {
+                // Add a new document with a generated ID to the "suggestions" collection
+                await db.collection("suggestions").add(suggestionData);
+                
+                // Success feedback
+                formStatus.innerText = "Thank you! Your suggestion has been submitted.";
+                formStatus.className = 'status-success';
+                suggestionForm.reset(); // Clear the form
+
+            } catch (error) {
+                // Error feedback
+                console.error("Error adding document: ", error);
+                formStatus.innerText = "Something went wrong. Please try again.";
+                formStatus.className = 'status-error';
+            } finally {
+                // Re-enable the button
+                submitButton.disabled = false;
+                submitButton.innerText = 'Submit Suggestion';
+            }
+        });
+
+        // Function to show/hide the "Other" text input field
+        function toggleOtherInput(show) {
+            const otherInputContainer = document.getElementById('other-input-container');
+            const otherInput = document.getElementById('other_text');
+            if (show) {
+                otherInputContainer.style.display = 'block';
+                otherInput.required = true; // Make it required only when visible
+            } else {
+                otherInputContainer.style.display = 'none';
+                otherInput.required = false;
+                otherInput.value = ''; // Clear the value if user switches away
+            }
+        }
+        
+    </script>
+
+</body>
+</html>
