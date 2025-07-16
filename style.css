@@ -1,0 +1,53 @@
+/* Add these styles to your existing style.css file */
+
+.hidden {
+    display: none !important;
+}
+
+#user-info {
+    display: inline-block;
+    margin-right: 1rem;
+    opacity: 0.7;
+}
+
+#add-site-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+#add-site-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#add-site-form input {
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 6px;
+}
+
+#add-site-form button {
+    font-size: 1rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: 2px solid var(--text-color);
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#add-site-form button:hover {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
