@@ -1,11 +1,10 @@
-// Step 1: PASTE YOUR FIREBASE CONFIG OBJECT HERE
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAp7UfFnyoAg3fZWVWt0gwoVoZEJBiZRgs",
+  authDomain: "uselesssite-a1dfd.firebaseapp.com",
+  projectId: "uselesssite-a1dfd",
+  storageBucket: "uselesssite-a1dfd.firebasestorage.app",
+  messagingSenderId: "557893414241",
+  appId: "1:557893414241:web:ef331a77038ac45565a920"
 };
 
 // Step 2: Initialize Firebase
