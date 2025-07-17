@@ -1,55 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>uselesswebsite</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Lighthouse | Credit Application</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <h1>uselesswebsite</h1>
-        <nav>
-            <button id="sign-in-btn">Sign In</button>
-            <span id="user-info" class="hidden"></span>
-            <button id="sign-out-btn" class="hidden">Sign Out</button>
-
-            <button id="theme-toggle-btn" aria-label="Toggle Theme">
-                <span class="material-symbols-outlined">light_mode</span>
-            </button>
-            <button id="search-open-btn" aria-label="Open Search">
-                <span class="material-symbols-outlined">search</span>
-            </button>
-        </nav>
-    </header>
-
     <main>
-        <div class="content">
-            <h2>Let's waste some time.</h2>
-            <p>Click the button to be transported to a random website from our database.</p>
-            <button id="random-site-btn">Take me somewhere else</button>
-        </div>
+        
+        <h1>Lighthouse Store Account Application</h1>
+        <p>Complete all sections below to apply for store credit.</p>
 
-        <div id="add-site-section" class="hidden">
-            <h3>Add a Useless Website</h3>
-            <form id="add-site-form">
-                <input type="text" id="site-name" placeholder="Website Name" required>
-                <input type="url" id="site-url" placeholder="https://example.com" required>
-                <button type="submit">Submit to Database</button>
-            </form>
-        </div>
+        <form id="applicationForm">
+            <fieldset>
+                <legend>1. Personal Information</legend>
+                <input type="text" id="fullName" placeholder="Full Name" required>
+                <input type="text" id="idNumber" placeholder="ID Number" required>
+                <input type="text" id="dob" placeholder="Date of Birth" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                <input type="text" id="gender" placeholder="Gender" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>2. Bank Details</legend>
+                <input type="text" id="bankName" placeholder="Bank Name" required>
+                <input type="text" id="accountType" placeholder="Account Type (e.g., Cheque)" required>
+                <input type="text" id="accountNumber" placeholder="Account Number" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>3. Income & Expenses</legend>
+                <input type="number" id="monthlyIncome" placeholder="Monthly Income (ZAR)" required>
+                <input type="number" id="monthlyExpenses" placeholder="Monthly Expenses (ZAR)" required>
+                <input type="text" id="otherIncome" placeholder="Other Income Sources (if any)">
+            </fieldset>
+
+            <fieldset>
+                <legend>4. Location & Contact</legend>
+                <input type="text" id="streetAddress" placeholder="Street Address" required>
+                <input type="text" id="city" placeholder="City" required>
+                <input type="text" id="province" placeholder="Province" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <input type="email" id="email" placeholder="Email Address" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>5. References</legend>
+                <input type="text" id="ref1Name" placeholder="Reference 1: Name" required>
+                <input type="text" id="ref1Relationship" placeholder="Reference 1: Relationship" required>
+                <input type="tel" id="ref1Phone" placeholder="Reference 1: Phone" required>
+                <hr class="ref-divider">
+                <input type="text" id="ref2Name" placeholder="Reference 2: Name" required>
+                <input type="text" id="ref2Relationship" placeholder="Reference 2: Relationship" required>
+                <input type="tel" id="ref2Phone" placeholder="Reference 2: Phone" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>6. Uploads</legend>
+                <label for="bankStatements">Upload Bank Statements (PDF, PNG, JPG):</label>
+                <input type="file" id="bankStatements" accept=".pdf,.png,.jpg,.jpeg" required>
+            </fieldset>
+
+            <button type="submit" id="submitBtn">Submit Application</button>
+            <div id="loadingIndicator" class="hidden">Submitting... Please wait.</div>
+            <div id="successMessage" class="hidden">Application submitted successfully!</div>
+        </form>
     </main>
 
-    <div id="search-overlay">
-        </div>
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
-    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
     <script src="script.js"></script>
+
+
 </body>
 </html>
-
